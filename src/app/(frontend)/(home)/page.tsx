@@ -10,6 +10,7 @@ export default async function HomePage() {
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
 
+  console.log(user)
   return (
     <div>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
