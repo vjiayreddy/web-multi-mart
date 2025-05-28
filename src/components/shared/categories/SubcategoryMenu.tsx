@@ -1,9 +1,10 @@
+import { CustomeCategory } from '@/lib/types'
 import { Category } from '@/payload-types'
 import Link from 'next/link'
 import React from 'react'
 
 interface SubcategoryMenuProps {
-  category: Category
+  category: CustomeCategory
   isOpen: boolean
   position: {
     top: number
@@ -37,7 +38,7 @@ const SubcategoryMenu: React.FC<SubcategoryMenuProps> = ({ category, isOpen, pos
           {category.subcategories?.map((subcategory: Category) => (
             <Link
               className="w-full text-left p-4 hover:bg-black hover:text-white flex justify-between items-center underline font-medium"
-              href="/"
+              href={`/${category.slug}/${subcategory.slug}`}
               key={subcategory.slug}
             >
               {subcategory.name}

@@ -1,7 +1,8 @@
-import Categories from '@/components/shared/categories/Categories'
+import { Categories } from '@/components/shared/categories/Categories'
 import Footer from '@/components/shared/footer/Footer'
 import NavBar from '@/components/shared/navigation/navbar'
 import SearchFilters from '@/components/shared/search-filters/SearchFilters'
+import { CustomeCategory } from '@/lib/types'
 import { Category } from '@/payload-types'
 
 import config from '@payload-config'
@@ -25,9 +26,10 @@ export default async function HomeLayout({
         exists: false,
       },
     },
+    sort: 'name',
   })
 
-  const formattedData = data.docs.map((doc) => ({
+  const formattedData: CustomeCategory[] = data.docs.map((doc) => ({
     ...doc,
     subcategories: (doc.subcategories?.docs ?? []).map((doc) => ({
       // Beasuse of "depth:1" we are confident "doc" will be type of "Category"
@@ -39,8 +41,10 @@ export default async function HomeLayout({
     <div className="flex flex-col min-h-screen">
       <NavBar />
       <div className="px-4 lg:px-12 py-8  flex flex-col gap-4 w-full border-b">
-        <SearchFilters data={data} />
-        <Categories data={formattedData} />
+        <SearchFilters data={formattedData} />
+        <div className="hidden lg:block">
+          <Categories data={formattedData} />
+        </div>
       </div>
 
       <div className="flex-1 bg-[#F4F4F0]">{children}</div>
