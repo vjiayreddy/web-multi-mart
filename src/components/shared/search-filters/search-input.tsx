@@ -1,14 +1,14 @@
 'use client'
 import { Input } from '@/components/ui/input'
-import { CustomeCategory } from '@/lib/types'
 import { ListFilterIcon, SearchIcon } from 'lucide-react'
 import React, { useState } from 'react'
 import CategorySidebar from '../categories/CategorySidebar'
 import { Button } from '@/components/ui/button'
+import { CategoriesGetManyOutput } from '@/modules/categories/types'
 
 interface SearchInputProps {
   disable?: boolean
-  data: CustomeCategory[]
+  data: CategoriesGetManyOutput
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({ disable, data }) => {

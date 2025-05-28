@@ -4,11 +4,11 @@ import { cn } from '@/lib/utils'
 import React, { useRef, useState } from 'react'
 import { useDropdownPosition } from './use-dropdown-position'
 import SubcategoryMenu from './SubcategoryMenu'
-import { CustomeCategory } from '@/lib/types'
 import Link from 'next/link'
+import { CategoriesGetManyOutput } from '@/modules/categories/types'
 
 interface CategoryDropDownProps {
-  category: CustomeCategory
+  category: CategoriesGetManyOutput[1]
   isActive?: boolean
   isNavigationHovered?: boolean
 }

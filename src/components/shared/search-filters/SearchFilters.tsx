@@ -1,13 +1,17 @@
+'use client'
 import React from 'react'
 import SearchInput from './search-input'
-import { CustomeCategory } from '@/lib/types'
+import { useTRPC } from '@/trpc/client'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 interface SearchFiltersProps {
-  data: CustomeCategory[]
+  disable?: boolean
 }
 
-const SearchFilters: React.FC<SearchFiltersProps> = ({ data }) => {
-  return <SearchInput disable={true} data={data} />
+const SearchFilters = ({ disable }: SearchFiltersProps) => {
+  const trpc = useTRPC()
+  const { data } = useSuspenseQuery(trpc.categories.getMany.queryOptions())
+  return <SearchInput disable={disable} data={data} />
 }
 
 export default SearchFilters

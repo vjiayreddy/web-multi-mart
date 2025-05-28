@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.css'
+import { TRPCReactProvider } from '@/trpc/client'
 
 export const metadata = {
   description: "we're more than an e-commerce store",
@@ -12,7 +13,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <main>{children}</main>
+        <TRPCReactProvider>
+          <main>{children}</main>
+        </TRPCReactProvider>
       </body>
     </html>
   )

@@ -3,32 +3,25 @@
 import { useParams } from 'next/navigation'
 import { ListFilterIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-//import { CategoriesSidebar } from "./categories-sidebar";
 import CategoryDropdown from './category-dropdown'
-import { CustomeCategory } from '@/lib/types'
 import CategorySidebar from './CategorySidebar'
+import { useTRPC } from '@/trpc/client'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-interface Props {
-  data: CustomeCategory[]
-}
-
-export const Categories = ({ data }: Props) => {
+export const Categories = () => {
   const params = useParams()
-
   const containerRef = useRef<HTMLDivElement>(null)
   const measureRef = useRef<HTMLDivElement>(null)
   const viewAllRef = useRef<HTMLDivElement>(null)
-
+  const trpc = useTRPC()
+  const { data } = useSuspenseQuery(trpc.categories.getMany.queryOptions())
   const [visibleCount, setVisibleCount] = useState(data.length)
   const [isAnyHovered, setIsAnyHovered] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
   const categoryParam = params.category as string | undefined
   const activeCategory = categoryParam || 'all'
-
   const activeCategoryIndex = data.findIndex((cat) => cat.slug === activeCategory)
   const isActiveCategoryHidden = activeCategoryIndex >= visibleCount && activeCategoryIndex !== -1
 
