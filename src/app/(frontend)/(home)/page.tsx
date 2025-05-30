@@ -15,5 +15,14 @@ export default function HomePage() {
   // const payloadConfig = await config
   // const payload = await getPayload({ config: payloadConfig })
   // const { user } = await payload.auth({ headers })
-  return <div>{JSON.stringify(data?.user)}</div>
+  return (
+    <div>
+      {data?.user && (
+        <>
+          <p>Login Session</p>
+          <p>Email : {data?.user?.email}</p>
+        </>
+      )}
+    </div>
+  )
 }
